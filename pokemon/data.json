@@ -1,0 +1,26 @@
+{
+  "trainer": {
+    "1": {
+      "name": "Ash Ketchum",
+      "pokemons": [1,4,7]
+    },
+    "2": {
+      "name": "James",
+      "pokemons": [1,4]
+    }
+  },
+  "pokemon": {
+    "1": {
+      "name": "Bulbasaur",
+      "types": ["Grass", "Poison"]
+    },
+    "4": {
+      "name": "Charmander",
+      "types": ["Fire"]
+    },
+    "7": {
+      "name": "Squirtle",
+      "types": ["Water"]
+    }
+  }
+}
