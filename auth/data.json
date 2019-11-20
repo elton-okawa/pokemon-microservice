@@ -1,0 +1,14 @@
+{
+  "user": {
+    "1": {
+      "id": 1,
+      "login": "ash-ketchum",
+      "password": "da-cidade-de-pallet"
+    },
+    "2": {
+      "id": 2,
+      "login": "james",
+      "password": "prepare-se-para-encrenca"
+    }
+  }
+}
