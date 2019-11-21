@@ -1,9 +1,9 @@
 import express from 'express';
-import * as jwt from 'jsonwebtoken';
 import { JsonDB } from 'node-json-db';
 import { Config } from 'node-json-db/dist/lib/JsonDBConfig'
 
 const app = express();
+app.use(express.json());
 const port = 3000
 
 // The second argument is used to tell the DB to save after each push
@@ -17,19 +17,17 @@ interface TrainerDb {
   pokemons: number[];
 }
 
+app.get('/', (req, res) => {
+  res.send('Pokemon microservice');
+});
 
 app.get('/trainer/:id', (req: any, res) => {
-  req.headers.token ? '' : res.status(401).send('Acesso Negado');
+  console.log(req.body);
+  const { tokenPayload } = req.body;
+  const data: TrainerDb = db.getData(`/trainer/${tokenPayload.trainerId}`);
+  data.pokemons = data.pokemons.map(pokemonId => db.getData(`pokemon/${pokemonId}`));
 
-  const payload: any = jwt.verify(req.headers.token, 'secret');
-  if (payload.trainerId === req.params.id) {
-    const data: TrainerDb = db.getData(`/trainer/${payload.trainerId}`);
-    data.pokemons = data.pokemons.map(pokemonId => db.getData(`pokemon/${pokemonId}`));
-
-    res.send(data);
-  } else {
-    res.status(401).send('Acesso negado'); 
-  }
+  res.send(data);
 });
 
 app.get('/pokemon/:id', (req, res) => {

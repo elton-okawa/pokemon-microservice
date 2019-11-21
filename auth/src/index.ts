@@ -19,6 +19,9 @@ interface UserDb {
   password: string;
 }
 
+app.get('/', (req, res) => {
+  res.send('Auth microservice');
+});
 
 app.post('/login', (req: any, res) => {
   const validInput = req.body && req.body.login && req.body.password;
