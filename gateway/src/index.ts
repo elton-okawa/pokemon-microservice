@@ -5,13 +5,17 @@ import { RequestOptions } from 'https';
 
 const app = express();
 app.use(express.json());
-const port = 3002
+const port = 3000
 
 const baseUrl = 'http://localhost';
-const pokemonPort = 3000;
+const pokemonPort = 3002;
 const authPort = 3001;
 
-const pokemonProxy = httpProxy(`${baseUrl}:${pokemonPort}`);
+const pokemonProxy = httpProxy(`${baseUrl}:${pokemonPort}`, { proxyReqBodyDecorator: (body, srcReq) => {
+  const tokenPayload = verifyAuth(srcReq.headers.authorization || '');
+  return { ...body, tokenPayload };
+}});
+
 const authServiceProxy = httpProxy(`${baseUrl}:${authPort}`);
 
 
@@ -28,9 +32,6 @@ app.get('/pokemon/:id', (req, res, next) => {
 });
 
 app.get('/trainer/:id', (req: any, res, next) => {
-  const tokenPayload = verifyAuth(req.headers.token);
-  req.body = { ...req.body, tokenPayload };
-
   pokemonProxy(req, res, next);
 });
 

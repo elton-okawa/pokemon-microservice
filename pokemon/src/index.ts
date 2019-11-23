@@ -4,7 +4,7 @@ import { Config } from 'node-json-db/dist/lib/JsonDBConfig'
 
 const app = express();
 app.use(express.json());
-const port = 3000
+const port = 3002
 
 // The second argument is used to tell the DB to save after each push
 // If you put false, you'll have to call the save() method.
@@ -22,10 +22,10 @@ app.get('/', (req, res) => {
 });
 
 app.get('/trainer/:id', (req: any, res) => {
-  console.log(req.body);
   const { tokenPayload } = req.body;
-  const data: TrainerDb = db.getData(`/trainer/${tokenPayload.trainerId}`);
-  data.pokemons = data.pokemons.map(pokemonId => db.getData(`pokemon/${pokemonId}`));
+  console.log(tokenPayload);
+  const data: TrainerDb = db.getData(`/trainer/${tokenPayload.id}`);
+  data.pokemons = data.pokemons.map(pokemonId => db.getData(`/pokemon/${pokemonId}`));
 
   res.send(data);
 });
