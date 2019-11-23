@@ -15,7 +15,7 @@ const db = new JsonDB(new Config("data", true, false, '/'));
 
 interface UserDb {
   id: number;
-  login: string;
+  username: string;
   password: string;
 }
 
@@ -24,15 +24,15 @@ app.get('/', (req, res) => {
 });
 
 app.post('/login', (req: any, res) => {
-  const validInput = req.body && req.body.login && req.body.password;
+  const validInput = req.body && req.body.username && req.body.password;
   if (!validInput) {
     return res.status(401).send('Credenciais inválidas');
   }
 
-  const data = db.find<UserDb>('/user', (user: UserDb) => user.login === req.body.login);
+  const data = db.find<UserDb>('/user', (user: UserDb) => user.username === req.body.username);
   
   if (!data || data.password !== req.body.password) {
-    return res.status(401).send('Login ou password inválido');
+    return res.status(401).send('Username ou password inválido');
   } else {
     const token = jwt.sign({ id: data.id }, 'secret');
     return res.send({ message: 'Login feito com sucesso', token });

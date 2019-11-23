@@ -2,12 +2,12 @@
   "user": {
     "1": {
       "id": 1,
-      "login": "ash",
+      "username": "ash",
       "password": "1234"
     },
     "2": {
       "id": 2,
-      "login": "james",
+      "username": "james",
       "password": "1234"
     }
   }

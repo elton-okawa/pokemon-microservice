@@ -1,7 +1,6 @@
 import express from 'express';
 import httpProxy from 'express-http-proxy';
 import * as jwt from 'jsonwebtoken';
-import { RequestOptions } from 'https';
 
 const app = express();
 app.use(express.json());
@@ -31,7 +30,7 @@ app.get('/pokemon/:id', (req, res, next) => {
   pokemonProxy(req, res, next);
 });
 
-app.get('/trainer/:id', (req: any, res, next) => {
+app.get('/trainer', (req, res, next) => {
   pokemonProxy(req, res, next);
 });
 

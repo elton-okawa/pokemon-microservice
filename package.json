@@ -4,11 +4,12 @@
   "main": "index.js",
   "scripts": {
     "start": "concurrently \"cd pokemon && yarn start\" \"cd auth && yarn start\" \"cd gateway && yarn start\"",
-    "install:all": "concurrently \"yarn install\" \"cd pokemon && yarn install\" \"cd auth && yarn install\" \"cd gateway && yarn install\""
+    "install:all": "concurrently \"yarn install\" \"cd pokemon && yarn install\" \"cd auth && yarn install\" \"cd gateway && yarn install\" \"cd client && yarn install\""
   },
   "author": "elton-okawa",
   "license": "MIT",
   "dependencies": {
     "concurrently": "^5.0.0"
-  }
+  },
+  "devDependencies": {}
 }

@@ -21,12 +21,12 @@ app.get('/', (req, res) => {
   res.send('Pokemon microservice');
 });
 
-app.get('/trainer/:id', (req: any, res) => {
+app.get('/trainer', (req: any, res) => {
   const { tokenPayload } = req.body;
   const data: TrainerDb = db.getData(`/trainer/${tokenPayload.id}`);
-  data.pokemons = data.pokemons.map(pokemonId => db.getData(`/pokemon/${pokemonId}`));
+  const pokemons = data.pokemons.map(pokemonId => db.getData(`/pokemon/${pokemonId}`));
 
-  res.send(data);
+  res.send({ ...data, pokemons });
 });
 
 app.get('/pokemon/:id', (req, res) => {
