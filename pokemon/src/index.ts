@@ -23,7 +23,6 @@ app.get('/', (req, res) => {
 
 app.get('/trainer/:id', (req: any, res) => {
   const { tokenPayload } = req.body;
-  console.log(tokenPayload);
   const data: TrainerDb = db.getData(`/trainer/${tokenPayload.id}`);
   data.pokemons = data.pokemons.map(pokemonId => db.getData(`/pokemon/${pokemonId}`));
 
