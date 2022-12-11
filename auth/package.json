@@ -7,7 +7,7 @@
     "start": "nodemon -r tsconfig-paths/register src/"
   },
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "jsonwebtoken": "^8.5.1",
     "node": "^13.1.0",
     "node-json-db": "^1.0.2",
